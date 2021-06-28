@@ -1,4 +1,4 @@
-apiVersion: kafka.strimzi.io/v1alpha1
+apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnector
 metadata:
   name: mongodb-sink-connector
@@ -8,10 +8,10 @@ spec:
   class: com.mongodb.kafka.connect.MongoSinkConnector
   tasksMax: 2
   config:
-    topics: mongo.test_db1.test_coll1
-    connection.uri: mongodb://<COSMOSDB_ACCOUNT_NAME>:<COSMOSDB_PRIMARY_KEY>@<COSMOSDB_ACCOUNT_NAME>.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@<COSMOSDB_ACCOUNT_NAME>@
-    database: test_db1_sink
-    collection: test_coll1_sink
+    topics: mongo.kafkamongodb.kafkamongodbcollection
+    connection.uri: mongodb://kafkamongodbaccount:TFpok5LqZOUeYX0SnEU0HInXL1J7tfOXvFqfLB1N2M5vaS7osyMXSYBnh3wwt2nRmsVSt0KHlSiMdUnqwPyAgw==@kafkamongodbaccount.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@kafkamongodbaccount@
+    database: kafkamongosinkdb
+    collection: kafkamongosinkdbcollection
     post.processor.chain: com.mongodb.kafka.connect.sink.processor.DocumentIdAdder,com.mongodb.kafka.connect.sink.processor.KafkaMetaAdder
     key.converter: org.apache.kafka.connect.json.JsonConverter
     key.converter.schemas.enable: false
